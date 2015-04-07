@@ -1,4 +1,6 @@
 # Terraria-File-Builder
 Application made in Java to build .json files.
 
-Using JSON Lib - http://json-lib.sourceforge.net/
+/* JSON Lib is not working */  JSON Lib - http://json-lib.sourceforge.net/
+
+Going to use GSON.
