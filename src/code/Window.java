@@ -1,42 +1,34 @@
 package code;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
 
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 
-import javax.swing.JButton;
-
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-
-import javax.swing.JSpinner;
-import javax.swing.JToolBar;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
 public class Window extends JFrame {
-
-	private JPanel contentPane;
-	private JTextField displayName;
+	
+	public JPanel contentPane;
+	public JTextField displayName;
+	private JTextField tooltip;
 	public static JTextField fileName;
-	private JTextField sizeX;
-	private JTextField sizeY;
-
+	public JTextField sizeX;
+	public JTextField sizeY;
+	
 	public static String filePath;
 	public static String jsonFilePath;
 	
 	public static String name;
-	public static String textureSizeX;
-	public static String textureSizeY;
+	public static String textureSizeX, textureSizeY;
+	public static String toolTip;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -50,14 +42,14 @@ public class Window extends JFrame {
 			}
 		});
 	}
-
+	
 	public Window() {
 		setTitle("Terraria File Builder");
 		createWindow();
 	}
 	
 	public void createWindow() {
-
+		
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e) {
@@ -102,12 +94,12 @@ public class Window extends JFrame {
 				name = displayName.getText();
 				textureSizeX = sizeX.getText();
 				textureSizeY = sizeY.getText();
+				toolTip = tooltip.getText();
 				
 				System.out.println("File name: " + filePath);
 				System.out.println("Display Name: " + name);
 				System.out.println("Texture Size: [" + textureSizeX + ", " + textureSizeY + "]");
-			
-				write();
+
 			}
 		});
 		generateButton.setBounds(438, 635, 348, 34);
@@ -125,14 +117,15 @@ public class Window extends JFrame {
 		JLabel sizeXLabel = DefaultComponentFactory.getInstance().createLabel("size [x]");
 		sizeXLabel.setBounds(243, 46, 40, 14);
 		contentPane.add(sizeXLabel);
-
-	}
-
-	public static void write() {
-
 		
-		jsonFilePath = "./src/out/" + filePath + ".json";
+		tooltip = new JTextField();
+		tooltip.setBounds(43, 135, 161, 29);
+		contentPane.add(tooltip);
+		tooltip.setColumns(10);
 		
-		System.out.println(jsonFilePath);
+		JLabel lblTooltip = DefaultComponentFactory.getInstance().createLabel("tooltip");
+		lblTooltip.setBounds(113, 116, 40, 14);
+		contentPane.add(lblTooltip);
+		
 	}
 }
