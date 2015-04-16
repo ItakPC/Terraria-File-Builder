@@ -1,4 +1,4 @@
-package code;
+/*package code;
 
 import static code.Window.*;
 import java.io.FileWriter;
@@ -30,3 +30,4 @@ public class JWriter {
 			}
 		}
 }
+*/
