@@ -1,33 +1,26 @@
 /*package code;
 
-import static code.Window.*;
-import java.io.FileWriter;
-import java.io.IOException;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import java.util.HashMap;
+import java.util.Map;
+
+import net.sf.json.JSONObject;
 
 public class JWriter {
-	private static final String jsonFilePath = "./src/out/test.json";
-		public static void main(String[] args) {
-			JsonObject jsonObject1 = new JsonObject();
-			JsonArray jsonArray = new JsonArray();
-			JsonElement jsonElement = null;
-			
-			jsonObject1.addProperty("displayName", name);
-			jsonObject1.addProperty("test", toolTip);
-
-			try{
-				
-				FileWriter jsonFileWriter = new FileWriter(jsonFilePath);
-				jsonFileWriter.write(jsonObject1.toString());
-				jsonFileWriter.flush();
-				jsonFileWriter.close();
-				System.out.println(jsonObject1);
-				
-			}catch(IOException e){
-				e.printStackTrace();
-			}
-		}
-}
-*/
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static void main(String[] args) {
+		Map map = new HashMap();  
+		map.put( "name", "json" );  
+		map.put( "bool", Boolean.TRUE );  
+		map.put( "int", new Integer(1) );  
+		map.put( "arr", new String[]{"13", "12"} );  
+		map.put( "func", "function(i){ return this.arr[i]; }" );  
+		
+		JSONObject jsonObject2 = JSONObject.fromObject( map );  
+		System.out.println( jsonObject2 );  
+	}
+	
+	public JWriter() {
+		
+	}
+}*/

@@ -17,10 +17,9 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 
 public class Main extends JFrame {
@@ -124,8 +123,10 @@ public class Main extends JFrame {
 				System.out.println("File name: " + filePath);
 				System.out.println("Display Name: " + name);
 				System.out.println("Texture Size: [" + textureSizeX + ", " + textureSizeY + "]");
-
+				
+				
 				random();
+				
 			}
 		});
 		generateButton.setBounds(438, 635, 348, 34);
@@ -207,42 +208,40 @@ public class Main extends JFrame {
 		valueCopper.setBounds(271, 269, 30, 30);
 		contentPane.add(valueCopper);
 		
-	}
+	}	
 	
+	@SuppressWarnings("unchecked")
 	public void random() {
 		final String jsonFilePath = "./src/out/" + filePath + ".json";
-		String values = platinum + ", " + gold + ", " +  silver + ", " +  copper;
 		
-		Gson gson = new Gson();
-		JsonObject jsonObject = new JsonObject();
-		JsonObject jsonObject1 = new JsonObject();
-		JsonArray jsonArray = new JsonArray();
-
+		JSONObject obj = new JSONObject();
+		JSONArray size = new JSONArray();
+		JSONArray value = new JSONArray();
 		
-		String[] string1 = {platinum, gold, silver, copper};
-		String valueArray = gson.toJson(string1); 
+		/** Everything else that's not an array ^.^ */
+		obj.put("displayName", name);
+		obj.put("tooltip", toolTip);
 		
-		String[] string2 = {textureSizeX, textureSizeY};
-		String sizeArray = gson.toJson(string2); 
-
+		/** Size of Item */
+		size.add(Integer.parseInt(textureSizeX));
+		size.add(Integer.parseInt(textureSizeY));
+		obj.put("size", size);
 		
-		jsonObject.addProperty("displayName", name);
-		jsonObject.addProperty("maxStack", stack);
-		jsonObject.addProperty("value", valueArray);
-		jsonObject.addProperty("rare", rarity);
-		jsonObject.addProperty("tooltip", toolTip);
+		/** Value of item */
+		value.add(Integer.parseInt(platinum));
+		value.add(Integer.parseInt(gold));
+		value.add(Integer.parseInt(silver));
+		value.add(Integer.parseInt(copper));
+		obj.put("value", value);
 		
-		try{
+		try {
+			FileWriter file = new FileWriter(jsonFilePath);
+			file.write(obj.toString());
+			file.flush();
+			file.close();
 			
-			FileWriter jsonFileWriter = new FileWriter(jsonFilePath);
-			jsonFileWriter.write(jsonObject.toString());
-			jsonFileWriter.flush();
-			jsonFileWriter.close();
-			System.out.println(jsonObject);
-			
-		}catch(IOException e){
+		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		
+		}	
 	}
 }

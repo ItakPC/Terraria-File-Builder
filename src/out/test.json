@@ -1,1 +1,6 @@
-{"displayName":"Hammox","test":"haha"}
+{
+"size":[42,41],
+"displayName":"Hammox",
+"tooltip":"Testing.",
+"value":[1,2,3,4]
+}
